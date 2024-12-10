@@ -9,7 +9,7 @@ import Foundation
 
 struct Task: Identifiable {
     let id = UUID()
-    var title: String
+    let title: String
     var isCompleted: Bool
-    var notes: String?
+    let notes: String
 }

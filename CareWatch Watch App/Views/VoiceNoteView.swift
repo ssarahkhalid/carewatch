@@ -55,18 +55,21 @@ struct VoiceNoteView: View {
     
     private func startRecording() {
         #if canImport(Speech) && !os(watchOS)
-        // Implementation for starting voice recording
+        // Real device implementation would go here
         #else
-        // Provide simulator feedback or alternative implementation
-        print("Speech recognition not available in watchOS simulator")
-        #endif
+        // Simulator implementation
         isRecording = true
+        
+        // Simulate dictation with a timer
+        Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
+            // Simulate some dictated text
+            notes += notes.isEmpty ? "John was in good spirits today." : " He is making good progress on his mobility."
+            stopRecording()
+        }
+        #endif
     }
     
     private func stopRecording() {
-        #if canImport(Speech) && !os(watchOS)
-        // Implementation for stopping voice recording
-        #endif
         isRecording = false
     }
 }

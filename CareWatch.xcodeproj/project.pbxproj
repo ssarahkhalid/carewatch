@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F559B1B92D04A58A00620356 /* CareWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F559B1B82D04A58A00620356 /* CareWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F559B1B92D04A58A00620356 /* AlayaCare.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F559B1B82D04A58A00620356 /* AlayaCare.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F559B1BE2D04A58A00620356 /* CareWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F559B1BD2D04A58A00620356 /* CareWatchApp.swift */; };
 		F559B1C22D04A58B00620356 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F559B1C12D04A58B00620356 /* Assets.xcassets */; };
 		F559B1C52D04A58B00620356 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F559B1C42D04A58B00620356 /* Preview Assets.xcassets */; };
@@ -39,7 +39,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				F559B1B92D04A58A00620356 /* CareWatch Watch App.app in Embed Watch Content */,
+				F559B1B92D04A58A00620356 /* AlayaCare.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		F559B1B22D04A58A00620356 /* CareWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F559B1B82D04A58A00620356 /* CareWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CareWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F559B1B82D04A58A00620356 /* AlayaCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlayaCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F559B1BD2D04A58A00620356 /* CareWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareWatchApp.swift; sourceTree = "<group>"; };
 		F559B1C12D04A58B00620356 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F559B1C42D04A58B00620356 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				F559B1B22D04A58A00620356 /* CareWatch.app */,
-				F559B1B82D04A58A00620356 /* CareWatch Watch App.app */,
+				F559B1B82D04A58A00620356 /* AlayaCare.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,7 +176,7 @@
 			);
 			name = "CareWatch Watch App";
 			productName = "CareWatch Watch App";
-			productReference = F559B1B82D04A58A00620356 /* CareWatch Watch App.app */;
+			productReference = F559B1B82D04A58A00620356 /* AlayaCare.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -388,7 +388,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CareWatch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = CareWatch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -397,7 +396,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sarahkhalid.CareWatch.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlayaCare;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -417,7 +416,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CareWatch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = CareWatch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -426,7 +424,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sarahkhalid.CareWatch.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AlayaCare;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

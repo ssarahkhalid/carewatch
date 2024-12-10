@@ -9,29 +9,33 @@ import Foundation
 import SwiftUI
 
 struct TaskListView: View {
-    @Binding var tasks: [Task]
+    @ObservedObject var viewModel: VisitViewModel
     
     var body: some View {
         List {
-            ForEach($tasks) { $task in
-                HStack {
-                    Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(task.isCompleted ? .green : .gray)
-                        .onTapGesture {
-                            task.isCompleted.toggle()
-                        }
-                    
-                    VStack(alignment: .leading) {
-                        Text(task.title)
-                            .strikethrough(task.isCompleted)
-                        if let notes = task.notes {
-                            Text(notes)
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                    }
+            ForEach(viewModel.currentVisit?.tasks ?? []) { task in
+                TaskRow(task: task) { isCompleted in
+                    viewModel.updateTask(task, isCompleted: isCompleted)
                 }
             }
+        }
+        .navigationTitle("Tasks")
+    }
+}
+
+struct TaskRow: View {
+    let task: Task
+    let onToggle: (Bool) -> Void
+    
+    var body: some View {
+        HStack {
+            Text(task.title)
+            Spacer()
+            Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
+                .foregroundColor(task.isCompleted ? .green : .gray)
+                .onTapGesture {
+                    onToggle(!task.isCompleted)
+                }
         }
     }
 }

@@ -56,4 +56,12 @@ class VisitViewModel: ObservableObject {
         visit.progressNotes = notes
         currentVisit = visit
     }
+    
+    func updateTask(_ task: Task, isCompleted: Bool) {
+        guard var visit = currentVisit else { return }
+        if let index = visit.tasks.firstIndex(where: { $0.id == task.id }) {
+            visit.tasks[index].isCompleted = isCompleted
+            currentVisit = visit
+        }
+    }
 }

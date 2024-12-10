@@ -22,15 +22,21 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                VisitView(viewModel: visitViewModel)
+                if let currentVisit = visitViewModel.currentVisit {
+                    VisitView(viewModel: visitViewModel, visit: currentVisit)
+                } else {
+                    Text("No active visit")
+                        .foregroundColor(.secondary)
+                }
             }
             .tag(1)
             .tabItem {
-                Label("Current", systemImage: "person.fill")
+                Label(visitViewModel.currentVisit != nil ? "Active Visit" : "Current", 
+                      systemImage: visitViewModel.currentVisit != nil ? "person.fill.checkmark" : "person.fill")
             }
         }
-        .onChange(of: visitViewModel.currentVisit) { oldValue, newValue in
-            if newValue != nil {
+        .onChange(of: visitViewModel.currentVisit) { _, newVisit in
+            if newVisit != nil {
                 selectedTab = 1
             }
         }

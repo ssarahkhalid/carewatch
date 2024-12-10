@@ -10,47 +10,35 @@ import SwiftUI
 
 struct VisitView: View {
     @ObservedObject var viewModel: VisitViewModel
-    @State private var showingTasks = false
-    @State private var showingVoiceNote = false
-    @State private var progressNotes: String = ""
+    let visit: Visit
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 15) {
-                if let visit = viewModel.currentVisit {
-                    Text(visit.patientName)
-                        .font(.title3)
-                        .bold()
+        VStack {
+            if viewModel.currentVisit == nil {
+                Button("Clock In") {
+                    viewModel.clockIn(visit: visit)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+            } else {
+                VStack(spacing: 20) {
+                    NavigationLink("View Service Tasks", destination: TaskListView(viewModel: viewModel))
                     
-                    Button(action: { showingTasks.toggle() }) {
-                        Label("Tasks", systemImage: "checklist")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .sheet(isPresented: $showingTasks) {
-                        if let visitBinding = Binding($viewModel.currentVisit) {
-                            TaskListView(tasks: visitBinding.tasks)
-                        }
-                    }
+                    NavigationLink("Add Progress Note", destination: 
+                        VoiceNoteView(notes: Binding(
+                            get: { viewModel.currentVisit?.progressNotes ?? "" },
+                            set: { viewModel.updateNotes($0) }
+                        ))
+                    )
                     
-                    Button(action: { showingVoiceNote.toggle() }) {
-                        Label("Progress Note", systemImage: "mic.fill")
-                            .frame(maxWidth: .infinity)
+                    Button("Clock Out") {
+                        viewModel.clockOut()
                     }
-                    .sheet(isPresented: $showingVoiceNote) {
-                        VoiceNoteView(notes: $progressNotes)
-                            .onDisappear {
-                                viewModel.updateNotes(progressNotes)
-                            }
-                    }
-                    
-                    Button(action: { viewModel.clockOut() }) {
-                        Label("Clock Out", systemImage: "arrow.right.circle.fill")
-                            .foregroundColor(.red)
-                            .frame(maxWidth: .infinity)
-                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.red)
                 }
             }
-            .padding()
         }
+        .navigationTitle(visit.patientName)
     }
 }

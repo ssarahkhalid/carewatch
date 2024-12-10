@@ -9,10 +9,5 @@ import Foundation
 
 struct Schedule {
     var visits: [Visit]
-    var date: Date
-    
-    func visitsForToday() -> [Visit] {
-        // For now, return all visits
-        return visits
-    }
+    let date: Date
 }
