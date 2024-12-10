@@ -24,30 +24,46 @@ class VisitViewModel: ObservableObject {
         
         let sampleVisits = [
             Visit(patientName: "John Doe", 
-                  startTime: Date(),
+                  startTime: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!,
+                  endTime: Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date())!,
                   address: "123 Main St",
                   tasks: sampleTasks,
-                  isCompleted: false),
+                  progressNotes: nil,
+                  isCompleted: false,
+                  displayTime: "9:00 AM - 10:00 AM"),
             Visit(patientName: "Jane Smith",
-                 startTime: Date().addingTimeInterval(3600),
+                 startTime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!,
+                 endTime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!,
                  address: "456 Oak Ave",
                  tasks: sampleTasks,
-                 isCompleted: false)
+                 progressNotes: nil,
+                 isCompleted: false,
+                 displayTime: "10:30 AM - 11:30 AM")
         ]
         
         self.schedule = Schedule(visits: sampleVisits, date: Date())
     }
     
+    private func formatDisplayTime(start: Date, end: Date?) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        let startString = formatter.string(from: start)
+        guard let end = end else { return startString }
+        let endString = formatter.string(from: end)
+        return "\(startString) - \(endString)"
+    }
+    
     func clockIn(visit: Visit) {
         var updatedVisit = visit
         updatedVisit.startTime = Date()
+        updatedVisit.displayTime = formatDisplayTime(start: updatedVisit.startTime, end: updatedVisit.endTime)
         currentVisit = updatedVisit
     }
     
     func clockOut() {
-        guard var visit = currentVisit else { return }
-        visit.endTime = Date()
-        visit.isCompleted = true
+        if let index = schedule.visits.firstIndex(where: { $0.id == currentVisit?.id }) {
+            schedule.visits[index].isCompleted = true
+        }
         currentVisit = nil
     }
     
@@ -57,7 +73,7 @@ class VisitViewModel: ObservableObject {
         currentVisit = visit
     }
     
-    func updateTask(_ task: Task, isCompleted: Bool) {
+    func updateTask(_ task: Task, isCompleted: Bool, note: String? = nil) {
         guard var visit = currentVisit else { return }
         if let index = visit.tasks.firstIndex(where: { $0.id == task.id }) {
             visit.tasks[index].isCompleted = isCompleted

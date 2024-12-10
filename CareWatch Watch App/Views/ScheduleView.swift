@@ -19,6 +19,9 @@ struct ScheduleView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .foregroundColor(visit == viewModel.currentVisit ? .green : .primary)
+                    Text(visit.displayTime)
+                        .font(.footnote)
+                        .foregroundColor(.black.opacity(0.8))
                     Text(visit.address)
                         .font(.subheadline)
                         .lineLimit(2)
@@ -40,10 +43,10 @@ struct ScheduleView: View {
     
     private func getVisitBackgroundColor(_ visit: Visit) -> Color {
         if visit.isCompleted {
-            return Color.blue
+            return Color.blue.opacity(0.2)
         } else if viewModel.currentVisit?.id == visit.id {
             return Color.green
         }
-        return Color.blue.opacity(0.3)
+        return Color.blue.opacity(0.8)
     }
 }

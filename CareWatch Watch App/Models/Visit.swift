@@ -15,7 +15,8 @@ struct Visit: Identifiable, Equatable {
     var address: String
     var tasks: [Task]
     var progressNotes: String?
-    var isCompleted: Bool
+    var isCompleted: Bool = false
+    var displayTime: String
     
     static func == (lhs: Visit, rhs: Visit) -> Bool {
         lhs.id == rhs.id
