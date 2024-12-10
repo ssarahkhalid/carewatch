@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = VisitViewModel()
+    @StateObject private var visitViewModel = VisitViewModel()
     @State private var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                ScheduleView(viewModel: viewModel)
+                ScheduleView(viewModel: visitViewModel)
             }
             .tag(0)
             .tabItem {
@@ -22,14 +22,14 @@ struct ContentView: View {
             }
             
             NavigationStack {
-                VisitView(viewModel: viewModel)
+                VisitView(viewModel: visitViewModel)
             }
             .tag(1)
             .tabItem {
                 Label("Current", systemImage: "person.fill")
             }
         }
-        .onChange(of: viewModel.currentVisit) { oldValue, newValue in
+        .onChange(of: visitViewModel.currentVisit) { oldValue, newValue in
             if newValue != nil {
                 selectedTab = 1
             }

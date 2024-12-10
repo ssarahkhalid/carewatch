@@ -6,28 +6,33 @@
 //
 
 import Foundation
-import SwiftUI
 
 class VisitViewModel: ObservableObject {
     @Published var currentVisit: Visit?
     @Published var schedule: Schedule
-    @Published var isClockingIn = false
     
     init() {
-        // Add sample visits
+        // Initialize with empty schedule
+        self.schedule = Schedule(visits: [], date: Date())
+        
+        // Add some sample data
+        let sampleTasks = [
+            Task(title: "Check blood pressure", isCompleted: false, notes: "Target: 120/80"),
+            Task(title: "Give medication", isCompleted: false, notes: "2 pills with water"),
+            Task(title: "Check temperature", isCompleted: false, notes: "Normal range: 97-99°F")
+        ]
+        
         let sampleVisits = [
             Visit(patientName: "John Doe", 
                   startTime: Date(),
-                  endTime: nil,
-                  address: "123 Main St", 
-                  tasks: [],
+                  address: "123 Main St",
+                  tasks: sampleTasks,
                   isCompleted: false),
-            Visit(patientName: "Jane Smith", 
-                  startTime: Date().addingTimeInterval(3600),
-                  endTime: nil,
-                  address: "456 Oak Ave", 
-                  tasks: [],
-                  isCompleted: false)
+            Visit(patientName: "Jane Smith",
+                 startTime: Date().addingTimeInterval(3600),
+                 address: "456 Oak Ave",
+                 tasks: sampleTasks,
+                 isCompleted: false)
         ]
         
         self.schedule = Schedule(visits: sampleVisits, date: Date())
@@ -47,9 +52,8 @@ class VisitViewModel: ObservableObject {
     }
     
     func updateNotes(_ notes: String) {
-        if var visit = currentVisit {
-            visit.progressNotes = notes
-            currentVisit = visit
-        }
+        guard var visit = currentVisit else { return }
+        visit.progressNotes = notes
+        currentVisit = visit
     }
 }

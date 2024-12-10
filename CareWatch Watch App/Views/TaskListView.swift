@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct TaskListView: View {
-    @State var tasks: [Task]
+    @Binding var tasks: [Task]
     
     var body: some View {
         List {

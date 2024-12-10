@@ -27,7 +27,9 @@ struct VisitView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .sheet(isPresented: $showingTasks) {
-                        TaskListView(tasks: visit.tasks)
+                        if let visitBinding = Binding($viewModel.currentVisit) {
+                            TaskListView(tasks: visitBinding.tasks)
+                        }
                     }
                     
                     Button(action: { showingVoiceNote.toggle() }) {
